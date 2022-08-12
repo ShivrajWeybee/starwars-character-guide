@@ -10,6 +10,39 @@ body {
   transition: 1s all;
 }
 
+.main-loader {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.main-loader img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-animation: 1.2s linear 0s infinite alternate mainLoader;
+          animation: 1.2s linear 0s infinite alternate mainLoader;
+}
+@-webkit-keyframes mainLoader {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes mainLoader {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .hero {
   position: relative;
   min-height: 100vh;
@@ -26,8 +59,8 @@ body {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  gap: 35px;
-  padding: 20px;
+  gap: 100px;
+  padding: 20px 50px;
   background-image: url(https://images.unsplash.com/photo-1613174635760-a78709ac1ace?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80);
   background-size: cover;
 }
@@ -70,16 +103,22 @@ body {
 }
 
 .popup {
-  border-radius: 20px;
-  overflow: hidden;
+  color: whitesmoke;
+  background-color: black;
+  border: 1px solid #ffc500;
+  border-radius: 10px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: whitesmoke;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 40px;
   z-index: 100;
+  padding: 40px;
+  min-width: 800px;
+  max-width: 800px;
+  min-height: 500px;
 }
 .popup i {
   position: absolute;
@@ -92,27 +131,149 @@ body {
   transition: 0.2s ease-in-out;
 }
 .popup .popup-img {
-  height: 350px;
+  max-width: 300px;
+  min-width: 300px;
+  max-height: 500px;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .popup .popup-img img {
   width: 100%;
-  height: 100%;
 }
 .popup .popup-details {
-  padding: 10px 40px 10px 40px;
-  height: 100%;
-  min-width: 400px;
-  max-width: 500px;
-  font-size: 18px;
+  font-size: 25px;
 }
 .popup .popup-details p {
   margin: 10px 0;
 }
 .popup .popup-details .title {
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 900;
+  color: #ffc500;
+}
+.popup .popup-details .popup-label {
+  -webkit-text-decoration: underline #ffc500;
+          text-decoration: underline #ffc500;
 }
 
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 2px;
+}
+
+.loader {
+  display: flex;
+  transform: translateZ(0);
+}
+.loader div {
+  height: 5px;
+  flex: 1;
+  background: #ffc500;
+  -webkit-animation: go 1s infinite alternate linear;
+          animation: go 1s infinite alternate linear;
+  box-shadow: 0 0 20px #ffc500;
+}
+.loader div:nth-child(1) {
+  -webkit-animation-delay: -0.95s;
+          animation-delay: -0.95s;
+}
+.loader div:nth-child(2) {
+  -webkit-animation-delay: -0.9s;
+          animation-delay: -0.9s;
+}
+.loader div:nth-child(3) {
+  -webkit-animation-delay: -0.85s;
+          animation-delay: -0.85s;
+}
+.loader div:nth-child(4) {
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+.loader div:nth-child(5) {
+  -webkit-animation-delay: -0.75s;
+          animation-delay: -0.75s;
+}
+.loader div:nth-child(6) {
+  -webkit-animation-delay: -0.7s;
+          animation-delay: -0.7s;
+}
+.loader div:nth-child(7) {
+  -webkit-animation-delay: -0.65s;
+          animation-delay: -0.65s;
+}
+.loader div:nth-child(8) {
+  -webkit-animation-delay: -0.6s;
+          animation-delay: -0.6s;
+}
+.loader div:nth-child(9) {
+  -webkit-animation-delay: -0.55s;
+          animation-delay: -0.55s;
+}
+.loader div:nth-child(10) {
+  -webkit-animation-delay: -0.5s;
+          animation-delay: -0.5s;
+}
+.loader div:nth-child(11) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+.loader div:nth-child(12) {
+  -webkit-animation-delay: -0.4s;
+          animation-delay: -0.4s;
+}
+.loader div:nth-child(13) {
+  -webkit-animation-delay: -0.35s;
+          animation-delay: -0.35s;
+}
+.loader div:nth-child(14) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+.loader div:nth-child(15) {
+  -webkit-animation-delay: -0.25s;
+          animation-delay: -0.25s;
+}
+.loader div:nth-child(16) {
+  -webkit-animation-delay: -0.2s;
+          animation-delay: -0.2s;
+}
+.loader div:nth-child(17) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+.loader div:nth-child(18) {
+  -webkit-animation-delay: -0.1s;
+          animation-delay: -0.1s;
+}
+.loader div:nth-child(19) {
+  -webkit-animation-delay: -0.05s;
+          animation-delay: -0.05s;
+}
+.loader div:nth-child(20) {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
+@-webkit-keyframes go {
+  100% {
+    background: transparent;
+    flex: 10;
+    box-shadow: 0 0 0 transparent;
+  }
+}
+
+@keyframes go {
+  100% {
+    background: transparent;
+    flex: 10;
+    box-shadow: 0 0 0 transparent;
+  }
+}
 .hidden {
   display: none;
 }
@@ -120,6 +281,31 @@ body {
 @media only screen and (max-width: 1170px) {
   .hero img {
     width: 90%;
+  }
+  .popup {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 400px;
+  }
+  .popup .popup-img {
+    max-width: 150px;
+    min-width: 150px;
+  }
+  .popup .popup-img img {
+    width: 100%;
+  }
+  .popup .popup-details {
+    font-size: 18px;
+  }
+  .popup .popup-details p {
+    margin: 5px 0;
+  }
+  .popup .popup-details .title {
+    font-size: 25px;
   }
   .all-characters {
     gap: 25px;
@@ -134,7 +320,28 @@ body {
     font-size: 10px;
   }
 }
+@media only screen and (max-width: 600px) {
+  .main-loader img {
+    width: 90%;
+  }
+  .popup {
+    min-width: 350px;
+    max-width: 350px;
+    min-height: 400px;
+  }
+}
 @media only screen and (max-width: 415px) {
+  .popup {
+    min-width: 280px;
+    max-width: 280px;
+    min-height: 400px;
+  }
+  .popup .popup-details {
+    font-size: 15px;
+  }
+  .popup .popup-details .title {
+    font-size: 20px;
+  }
   .all-characters .one-character {
     width: 100px;
   }
