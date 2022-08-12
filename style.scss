@@ -256,6 +256,9 @@ body {
             width: 90%;
         }
     }
+    .wrapper {
+        width: 200px;
+    }
     .popup {
         min-width: 350px;
         max-width: 350px;
@@ -263,6 +266,9 @@ body {
     }
 }
 @media only screen and (max-width: 415px) {
+    .wrapper {
+        width: 100px;
+    }
     .popup {
         min-width: 280px;
         max-width: 280px;
