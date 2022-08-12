@@ -1,5 +1,6 @@
 'use strict';
 
+const heroPage = document.querySelector('.hero');
 const allCharacters = document.querySelector('.all-characters');
 const oneCharacter = document.querySelectorAll('.one-character');
 const loader = document.querySelector('.wrapper');
@@ -17,6 +18,12 @@ const films = document.querySelector('.films');
 const popupIMG = document.querySelector('.pimg');
 
 let count = 1;
+
+mainLoader();
+
+heroPage.addEventListener('click', function() {
+    allCharacters.scrollIntoView({behavior: "smooth"});
+})
 
 // Set Up the Main Loader
 function mainLoader() {
@@ -37,7 +44,7 @@ const fetchApi = function(url) {
         })
         .then((next) => {
             if (!next) {
-                mainLoader();
+                // mainLoader();
                 return;
             };
             fetchApi(next);
