@@ -69,6 +69,7 @@ body {
         }
     }
     .scroll-txt {
+        cursor: pointer;
         color: rgba(245, 245, 245, 0.486);
         text-align: center;
         text-transform: uppercase;
@@ -84,53 +85,19 @@ body {
     }
 }
 
-.all-characters {
-    min-height: 100vh;
+.character-wrapper {
+    background-image:url(Noise.jpg);
+    background-color: rgba(0, 0, 0, 0.2);
+    background-blend-mode: overlay;
+    background-size: cover;
+    padding: 5% 5%;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 100px;
-    padding: 20px 50px;
-    // background-image: url(https://images.unsplash.com/photo-1613174635760-a78709ac1ace?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80);
-    // background-size: cover;
-
-    .one-character {
-        cursor: pointer;
-        // display: flex;
-        // flex-direction: column;
-        border-radius: 10px 10px 0 0;
-        overflow: hidden;
-        width: 200px;
-
-        img {
-            object-fit: cover;
-            width: 100%;
-        }
-
-        .character-name {
-            background-color: whitesmoke;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 15px;
-            font-weight: 900;
-        }
-
-        &:hover {
-            border: 4px solid transparent;
-            transition: 0.14s ease-in-out;
-
-            img {
-                border: 1px solid whitesmoke;
-                border-radius: 10px 10px 0 0;
-                transition: 0.14s ease-in-out;
-            }
-        }
-    }
+    flex-direction: column;
+    position: relative;
 }
 
 .pagination {
-    padding: 20px;
-    border: 2px solid red;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,28 +108,84 @@ body {
         color: whitesmoke;
         background-color: transparent;
         padding: 10px 15px;
-        font-size: 30px;
-        &:hover {
-            background-color: $color;
-            color: black;
-            border-radius: 5px;
-        }
+        font-size: 20px;
+    }
+    button:hover {
+        background-color: $color;
+        color: black;
+        border-radius: 5px;
     }
     .active-page {
         border-radius: 5px;
         color: black;
         background-color: $color;
     }
+    .disableBTN {
+        color: rgba(128, 128, 128, 0.600);
+    }
+    .disableBTN:hover {
+        background-color: transparent;
+        color: rgba(128, 128, 128, 0.600);
+    }
+    select {
+        text-align: center;
+        width: 60px;
+        color: whitesmoke;
+        font-size: 20px;
+        border: none;
+        background-color: black;
+    }
+}
+
+.all-characters {
+    padding-top: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-flow: row wrap;
+
+    .one-character {
+        margin: 20px 50px;
+        cursor: pointer;
+        border-radius: 10px 10px 0 0;
+        overflow: hidden;
+        flex: 0 1 calc(20% - 100px);
+        // width: 150px;
+        // height: fit-content;
+
+        img {
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .character-name {
+            background-color: whitesmoke;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        &:hover {
+            transform: scale(1.04);
+            transition: 0.14s ease-in;
+
+            img {
+                opacity: 0.8;
+                transition: 0.14s ease-in;
+            }
+        }
+    }
 }
 
 // PopUp Box
 .popup-backdrop {
-    background-color: rgba(0, 0, 0, 0.747);
+    background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0%;
     left: 0%;
     width: 100%;
     height: 100%;
+    z-index: 100;
 }
 .popup {
     color: whitesmoke;
@@ -176,7 +199,7 @@ body {
     display: flex;
     justify-content: flex-start;
     gap: 40px;
-    z-index: 100;
+    z-index: 1000;
     padding: 40px;
     min-width: 800px;
     max-width: 800px;
@@ -257,21 +280,38 @@ body {
     display: none;
 }
 
-
-@media only screen and (max-width: 1170px) {
+@media only screen and (max-width: 1440px) {
     .hero {
         img {
-            width: 90%;
+            width: 50%;
+        }
+
+        .scroll-down {
+            i{
+                font-size: 20px;
+            }
+        }
+
+        .scroll-txt {
+            font-size: 10px;
         }
     }
+}
+
+@media only screen and (max-width: 1200px) {
     .popup {
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         gap: 10px;
         padding: 20px;
         min-width: 500px;
         max-width: 500px;
         min-height: 400px;
+        i {
+            top: -5%;
+            right: -5%;
+        }
         .popup-img {
             max-width: 150px;
             min-width: 150px;
@@ -292,18 +332,35 @@ body {
     .all-characters {
         gap: 25px;
         padding: 10px;
-    }
-}
-@media only screen and (max-width: 812px) {
-    .all-characters {
         .one-character {
-            width: 150px;
-            .character-name {
-                font-size: 10px;
-            }
+            margin: 0px 10px;
+            flex: 0 1 calc(15% - 20px);
         }
     }
 }
+
+@media only screen and (max-width: 1000px) {
+    .character-wrapper {
+        padding: 1% 1%;
+    }
+}
+
+@media only screen and (max-width: 812px) {
+    .all-characters {
+        .one-character {
+            // width: 150px;
+            margin: 10px 20px;
+            flex: 0 1 calc(40% - 40px);
+            .character-name {
+                font-size: 25px;
+            }
+        }
+    }
+    .popup {
+        align-items: center;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .main-loader {
         img {
@@ -319,6 +376,7 @@ body {
         min-height: 400px;
     }
 }
+
 @media only screen and (max-width: 415px) {
     .wrapper {
         width: 100px;
@@ -340,6 +398,15 @@ body {
             .character-name {
                 font-size: 10px;
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .all-characters {
+        .one-character {
+            margin: 10px 10px;
+            flex: 0 1 calc(40% - 20px);
         }
     }
 }
