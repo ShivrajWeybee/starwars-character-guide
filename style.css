@@ -71,6 +71,7 @@ body {
   font-size: 30px;
 }
 .hero .scroll-txt {
+  cursor: pointer;
   color: rgba(245, 245, 245, 0.486);
   text-align: center;
   text-transform: uppercase;
@@ -90,45 +91,19 @@ body {
   }
 }
 
-.all-characters {
-  min-height: 100vh;
+.character-wrapper {
+  background-image: url(Noise.jpg);
+  background-color: rgba(0, 0, 0, 0.2);
+  background-blend-mode: overlay;
+  background-size: cover;
+  padding: 5% 5%;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 100px;
-  padding: 20px 50px;
-}
-.all-characters .one-character {
-  cursor: pointer;
-  border-radius: 10px 10px 0 0;
-  overflow: hidden;
-  width: 200px;
-}
-.all-characters .one-character img {
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 100%;
-}
-.all-characters .one-character .character-name {
-  background-color: whitesmoke;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 15px;
-  font-weight: 900;
-}
-.all-characters .one-character:hover {
-  border: 4px solid transparent;
-  transition: 0.14s ease-in-out;
-}
-.all-characters .one-character:hover img {
-  border: 1px solid whitesmoke;
-  border-radius: 10px 10px 0 0;
-  transition: 0.14s ease-in-out;
+  flex-direction: column;
+  position: relative;
 }
 
 .pagination {
-  padding: 20px;
-  border: 2px solid red;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,7 +114,7 @@ body {
   color: whitesmoke;
   background-color: transparent;
   padding: 10px 15px;
-  font-size: 30px;
+  font-size: 20px;
 }
 .pagination button:hover {
   background-color: #ffc500;
@@ -151,14 +126,64 @@ body {
   color: black;
   background-color: #ffc500;
 }
+.pagination .disableBTN {
+  color: rgba(128, 128, 128, 0.6);
+}
+.pagination .disableBTN:hover {
+  background-color: transparent;
+  color: rgba(128, 128, 128, 0.6);
+}
+.pagination select {
+  text-align: center;
+  width: 60px;
+  color: whitesmoke;
+  font-size: 20px;
+  border: none;
+  background-color: black;
+}
+
+.all-characters {
+  padding-top: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+}
+.all-characters .one-character {
+  margin: 20px 50px;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  flex: 0 1 calc(20% - 100px);
+}
+.all-characters .one-character img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+.all-characters .one-character .character-name {
+  background-color: whitesmoke;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: 900;
+}
+.all-characters .one-character:hover {
+  transform: scale(1.04);
+  transition: 0.14s ease-in;
+}
+.all-characters .one-character:hover img {
+  opacity: 0.8;
+  transition: 0.14s ease-in;
+}
 
 .popup-backdrop {
-  background-color: rgba(0, 0, 0, 0.747);
+  background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0%;
   left: 0%;
   width: 100%;
   height: 100%;
+  z-index: 100;
 }
 
 .popup {
@@ -173,7 +198,7 @@ body {
   display: flex;
   justify-content: flex-start;
   gap: 40px;
-  z-index: 100;
+  z-index: 1000;
   padding: 40px;
   min-width: 800px;
   max-width: 800px;
@@ -333,18 +358,31 @@ body {
   display: none;
 }
 
-@media only screen and (max-width: 1170px) {
+@media only screen and (max-width: 1440px) {
   .hero img {
-    width: 90%;
+    width: 50%;
   }
+  .hero .scroll-down i {
+    font-size: 20px;
+  }
+  .hero .scroll-txt {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 1200px) {
   .popup {
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 10px;
     padding: 20px;
     min-width: 500px;
     max-width: 500px;
     min-height: 400px;
+  }
+  .popup i {
+    top: -5%;
+    right: -5%;
   }
   .popup .popup-img {
     max-width: 150px;
@@ -366,13 +404,26 @@ body {
     gap: 25px;
     padding: 10px;
   }
+  .all-characters .one-character {
+    margin: 0px 10px;
+    flex: 0 1 calc(15% - 20px);
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .character-wrapper {
+    padding: 1% 1%;
+  }
 }
 @media only screen and (max-width: 812px) {
   .all-characters .one-character {
-    width: 150px;
+    margin: 10px 20px;
+    flex: 0 1 calc(40% - 40px);
   }
   .all-characters .one-character .character-name {
-    font-size: 10px;
+    font-size: 25px;
+  }
+  .popup {
+    align-items: center;
   }
 }
 @media only screen and (max-width: 600px) {
@@ -408,5 +459,11 @@ body {
   }
   .all-characters .one-character .character-name {
     font-size: 10px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .all-characters .one-character {
+    margin: 10px 10px;
+    flex: 0 1 calc(40% - 20px);
   }
 }/*# sourceMappingURL=style.css.map */

@@ -16,13 +16,18 @@ const species = document.querySelector('.species');
 const homeworld = document.querySelector('.homeworld');
 const films = document.querySelector('.films');
 const popupIMG = document.querySelector('.pimg');
+const prevPageBTN = document.querySelector('.previous-page');
+const nextPageBTN = document.querySelector('.next-page');
+const pagination = document.querySelector('.pagination');
+const dropDown = document.querySelector('#page-dropdown');
 
+let pageCount = 1;
 let count = 1;
-
-mainLoader();
+let characterId = [];
+let currentPage = 1;
 
 heroPage.addEventListener('click', function() {
-    allCharacters.scrollIntoView({behavior: "smooth"});
+    document.querySelector('.character-wrapper').scrollIntoView({behavior: "smooth"});
 })
 
 // Set Up the Main Loader
@@ -31,25 +36,94 @@ function mainLoader() {
     document.querySelector('.container').classList.remove('hidden');
 }
 
+async function countPage(url) {
+    renderPage(pageCount);
+    const a = await fetch(url);
+    const res = await a.json();
+    console.log(res.next)
+    if(res.next) {
+        pageCount++;
+        countPage(res.next);
+    }
+}
+countPage('https://swapi.dev/api/people/');
+
+
+function renderPage(pageNo) {
+    const html = `
+    <option value="${pageNo}">${pageNo}</option>
+    `
+    // const html = `
+    // <button class="${pageNo}">${pageNo}</button>
+    // `
+
+    dropDown.insertAdjacentHTML('beforeend', html);
+    // document.querySelector('.page-btns').insertAdjacentHTML('beforeend', html);
+}
+
 // Fetching API data
 const fetchApi = function(url) {
+    allCharacters.innerHTML = '';
     const api = fetch(url)
         .then(res => res.json())
         .then(data => {
             const ar = data.results;
             ar.forEach(i => {
-                setImgagesSRC(count, i.name);
+                const id = (i.url.split('/'));
+                characterId.push({id: Number(id[id.length-2])})
+                setImgagesSRC(Number(id[id.length-2]), i.name);
             })
-            return data.next;
-        })
-        .then((next) => {
-            if (!next) {
-                // mainLoader();
-                return;
-            };
-            fetchApi(next);
+            mainLoader();
+            return data.next 
         })
 }
+fetchApi(`https://swapi.dev/api/people/`);
+
+// Pagination
+async function getPageDetails() {
+    const selectedPage = dropDown.options[dropDown.selectedIndex].value;
+    fetchApi(`https://swapi.dev/api/people/?page=${selectedPage}`);
+}
+
+dropDown.addEventListener('change', function(e) {
+    const selectedPage = dropDown.options[dropDown.selectedIndex].value;
+    currentPage = selectedPage;
+    fetchApi(`https://swapi.dev/api/people/?page=${selectedPage}`);
+
+    if(currentPage == 1 || currentPage == pageCount) {
+        prevPageBTN.classList.add('disableBTN');
+        nextPageBTN.classList.add('disableBTN');
+    }
+
+    prevPageBTN.classList.remove('disableBTN');
+    nextPageBTN.classList.remove('disableBTN');
+})
+
+pagination.addEventListener('click', function(e) {
+    
+    if(e.target.classList.contains('previous-page')) {
+        if(currentPage == 1) {
+            return;
+        }
+        prevPageBTN.classList.remove('disableBTN');
+        nextPageBTN.classList.remove('disableBTN');
+        currentPage--;
+        fetchApi(`https://swapi.dev/api/people/?page=${currentPage}`);
+        dropDown.value = currentPage;
+    }
+
+    if(e.target.classList.contains('next-page')) {
+        if(currentPage == pageCount) {
+            return;
+        }
+        prevPageBTN.classList.remove('disableBTN');
+        nextPageBTN.classList.remove('disableBTN');
+        currentPage++;
+        fetchApi(`https://swapi.dev/api/people/?page=${currentPage}`);
+        dropDown.value = currentPage;
+    }
+})
+
 
 // Set the Image through API data 
 const setImgagesSRC = function(imgNo, charName) {
@@ -66,8 +140,6 @@ const setImgagesSRC = function(imgNo, charName) {
     allCharacters.insertAdjacentHTML('beforeend', html);
     count++;
 }
-
-fetchApi(`https://swapi.dev/api/people/`);
 
 // Get particular character's details
 async function callDetails(e) {
